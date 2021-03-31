@@ -17,7 +17,7 @@ public class ConnectionManager implements Runnable{
     }
 
     @Override
-    public void run() { //rimandargli run intero
+    public void run() {
         try{
             try{
                 System.out.println("Collegamento effettuato");

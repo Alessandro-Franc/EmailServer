@@ -2,13 +2,16 @@ package sample;
 
 import java.io.Serializable;
 
-public class EasyEmail implements Serializable{
+public class EasyEmail implements Serializable {
+    private String destination;
+    private String Mitt;
     private String object;
     private String eText;
-    private String destination;
 
-    public EasyEmail(String destination , String obj , String eText){
+
+    public EasyEmail(String destination, String Mitt, String obj , String eText){
         this.destination = destination;
+        this.Mitt = Mitt;
         this.object=obj;
         this.eText = eText;
     }
@@ -23,5 +26,9 @@ public class EasyEmail implements Serializable{
 
     public String getDestination(){
         return destination;
+    }
+
+    public String getMitt(){
+        return Mitt;
     }
 }

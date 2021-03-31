@@ -17,14 +17,14 @@ public class Controller{
         try{
             Load();
         } catch (Exception e ) { //creo utenti fittizzi
-            EasyEmail a = new EasyEmail("Luigi@mail" , "Object for Luigi", "Ciao luigi!");
-            EasyEmail b = new EasyEmail("Andrea@mail" , "Object for Andrea", "Ciao andrea!");
+            EasyEmail a = new EasyEmail("Luigi@mail" ,"Mario@mail", "Object for Luigi", "Ciao luigi!");
+            EasyEmail b = new EasyEmail("Andrea@mail" ,"Mario@mail", "Object for Andrea", "Ciao andrea!");
             ArrayList<EasyEmail> MarioList = new ArrayList<>();
             MarioList.add(a);
             MarioList.add(b);
             model.addUtente(new Utente("Mario@mail" , "Mario" , MarioList));
 
-            EasyEmail c = new EasyEmail("Mario@mail" , "Object for Mario", "Ciao mario!");
+            EasyEmail c = new EasyEmail("Mario@mail" ,"Luigi@mail", "Object for Mario", "Ciao mario!");
             ArrayList<EasyEmail> LuigiList = new ArrayList<>();
             LuigiList.add(c);
             LuigiList.add(b);
