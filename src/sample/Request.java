@@ -3,16 +3,16 @@ package sample;
 import java.io.Serializable;
 
 public class Request implements Serializable {
-    private int id;
+    private int Rtype;
     private String Utente;
 
-    public Request (int id, String u) {
-        this.id = id;
+    public Request (int iRtype, String u) {
+        this.Rtype = Rtype;
         this.Utente = u;
     }
 
-    public int getId() {
-        return this.id;
+    public int getRtype() {
+        return this.Rtype;
     }
 
     public String getUtente() {

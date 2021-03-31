@@ -25,10 +25,10 @@ public class ConnectionManager implements Runnable{
                 String request = in.readUTF();
                 System.out.println(request);
                 Request f = new Gson().fromJson(request, Request.class);
-                int idR = f.getId();
+                int Rtype = f.getRtype();
                 String u = f.getUtente();
                 utente = model.getUtente(u);
-                switch (idR) {
+                switch (Rtype) {
                     case 0:
                         //Invio la lista delle email
                         ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
