@@ -107,7 +107,7 @@ public class ConnectionManager implements Runnable{
     }
 
     public void Save() throws IOException {
-        File f = new File("B:\\Desktop\\scuola\\prog 3\\progetto\\wetransfer-9c7849\\EmailServer\\src\\sample\\Database.txt");
+        File f = new File("src/sample/Database.txt");
         ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(f));
         out.writeObject(model.getUtentiList());
     }
