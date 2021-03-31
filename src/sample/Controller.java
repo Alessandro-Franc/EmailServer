@@ -50,7 +50,6 @@ public class Controller{
     }
 
     public void Load() throws IOException, ClassNotFoundException {
-        //fsd
         File f = new File("src/sample/Database.txt");
         ObjectInputStream in = new ObjectInputStream(new FileInputStream(f));
         model.setUtentiList((ArrayList<Utente>)in.readObject());
