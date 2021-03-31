@@ -1,12 +1,8 @@
 package sample;
 
-import javafx.beans.Observable;
+
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Model{
