@@ -4,9 +4,7 @@ import com.google.gson.Gson;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.ArrayList;
 
-import static java.lang.Thread.sleep;
 
 public class ConnectionManager implements Runnable{
     private Model model;
@@ -17,46 +15,6 @@ public class ConnectionManager implements Runnable{
         this.model=m;
         this.socket = socket;
     }
-
-    /*@Override
-    public void run() {
-        int request;
-        try{
-            try{
-                System.out.println("Collegamento effettuato");
-                InputStream Request = new DataInputStream(socket.getInputStream());
-                request = Request.read();
-                utente = model.getUtentiList().get(0);
-                switch(request){
-                    case 0 :
-                        //Invio la lista delle email
-                        ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-                        out.writeObject(utente.getEMailList());
-                        for(int i=0; i<utente.getEMailList().size() ; i++){
-                            System.out.println(utente.getEMailList().get(i).getObject());
-                        }
-                        break;
-                    case 1:
-                        //aggiungo email alla lista
-                        ObjectInputStream emailIn =  new ObjectInputStream(socket.getInputStream());
-                        System.out.println("Email ricevuta");
-                        try{
-                            EasyEmail m = ((EasyEmail) emailIn.readObject());
-                            utente.getEMailList().add(m);
-                        }catch(ClassNotFoundException e){
-                            System.out.println(e.getMessage());
-                        }
-                        break;
-                    default:
-                        break;
-                }
-            }finally{
-                socket.close();
-            }
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-    }*/
 
     @Override
     public void run() { //rimandargli run intero

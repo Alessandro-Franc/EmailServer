@@ -1,22 +1,18 @@
 package sample;
 
-import javafx.collections.ObservableList;
-import javafx.fxml.Initializable;
-import javafx.scene.control.ListView;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
 
-import static java.lang.Thread.sleep;
+import java.util.ArrayList;
+
+
 
 public class Controller{
     private Model model;
 
-    public void start(Model model) throws IOException, ClassNotFoundException {
+    public void start(Model model){
         this.model = model;
         try{
             Load();
