@@ -41,17 +41,19 @@ public class ConnectionManager implements Runnable{
                         //aggiungo email alla lista
                         SendMail e = new Gson().fromJson(request, SendMail.class);
                         EasyEmail m = e.getEE();
-                        String dest = m.getDestination();
-                        Utente destinatario = model.getUtente(dest);
-                        if(destinatario==null) {
-                            System.out.println("Email con destinatario inesistente");
+                        String[] dest = m.getDestination();
+                        for(int i = 0; i< dest.length; i++) {
+                            Utente destinatario = model.getUtente(dest[i]);
+                            if(destinatario==null) {
+                                System.out.println("Destinatario numero "+(i+1)+" inesistente");
+                            }
+                            else {
+                                System.out.println("Email ricevuta");
+                                destinatario.getEMailList().add(m);
+                            }
                         }
-                        else {
-                            System.out.println("Email ricevuta");
-                            utente.getEMailList().add(m);
-                            destinatario.getEMailList().add(m);
-                            Save();
-                        }
+                        utente.getEMailList().add(m);
+                        Save();
                         break;
                     default:
                         break;

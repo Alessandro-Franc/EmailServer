@@ -3,13 +3,13 @@ package sample;
 import java.io.Serializable;
 
 public class EasyEmail implements Serializable {
-    private String destination;
+    private String[] destination;
     private String Mitt;
     private String object;
     private String eText;
 
 
-    public EasyEmail(String destination, String Mitt, String obj , String eText){
+    public EasyEmail(String[] destination, String Mitt, String obj , String eText){
         this.destination = destination;
         this.Mitt = Mitt;
         this.object=obj;
@@ -24,7 +24,7 @@ public class EasyEmail implements Serializable {
         return eText;
     }
 
-    public String getDestination(){
+    public String[] getDestination(){
         return destination;
     }
 

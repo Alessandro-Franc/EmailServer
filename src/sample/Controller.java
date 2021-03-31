@@ -17,22 +17,24 @@ public class Controller{
         try{
             Load();
         } catch (Exception e ) { //creo utenti fittizzi
-            EasyEmail a = new EasyEmail("Luigi@mail" ,"Mario@mail", "Object for Luigi", "Ciao luigi!");
-            EasyEmail b = new EasyEmail("Andrea@mail" ,"Mario@mail", "Object for Andrea", "Ciao andrea!");
+            EasyEmail a = new EasyEmail(new String[]{"Luigi@mail"},"Mario@mail", "Object for Luigi", "Ciao luigi!");
+            EasyEmail b = new EasyEmail(new String[]{"Andrea@mail"},"Mario@mail", "Object for Andrea", "Ciao andrea!");
             ArrayList<EasyEmail> MarioList = new ArrayList<>();
             MarioList.add(a);
             MarioList.add(b);
             model.addUtente(new Utente("Mario@mail" , "Mario" , MarioList));
 
-            EasyEmail c = new EasyEmail("Mario@mail" ,"Luigi@mail", "Object for Mario", "Ciao mario!");
+            EasyEmail c = new EasyEmail(new String[]{"Mario@mail"},"Luigi@mail", "Object for Mario", "Ciao mario!");
+            EasyEmail d = new EasyEmail(new String[]{"Andrea@mail"},"Luigi@mail", "Object for Andrea", "Ciao andrea!");
+
             ArrayList<EasyEmail> LuigiList = new ArrayList<>();
             LuigiList.add(c);
-            LuigiList.add(b);
+            LuigiList.add(d);
             model.addUtente(new Utente("Luigi@mail" , "Luigi" , LuigiList));
 
             ArrayList<EasyEmail> AndreaList = new ArrayList<>();
-            AndreaList.add(a);
-            AndreaList.add(c);
+            AndreaList.add(b);
+            AndreaList.add(d);
             model.addUtente(new Utente("Andrea@mail" , "Andrea" , MarioList));
         }
         try{
