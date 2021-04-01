@@ -22,10 +22,13 @@ public class ConnectionManager implements Runnable{
             try{
                 System.out.println("Collegamento effettuato");
                 DataInputStream in =  new DataInputStream(socket.getInputStream());
-                String request = in.readUTF();
-                System.out.println(request);
-                Request f = new Gson().fromJson(request, Request.class);
+                String packet = in.readUTF();
+                System.out.println(packet);
+                //spacchetto il gson
+                Request f = new Gson().fromJson(packet, Request.class);
+                //identifico il tipo di richiesta
                 int Rtype = f.getRtype();
+                //identifico l'utente che comunica col server
                 String u = f.getUtente();
                 utente = model.getUtente(u);
                 switch (Rtype) {
@@ -33,13 +36,18 @@ public class ConnectionManager implements Runnable{
                         //Invio la lista delle email
                         ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
                         out.writeObject(utente.getEMailList());
-                        for(int i=0; i<utente.getEMailList().size() ; i++){
-                            System.out.println(utente.getEMailList().get(i).getObject());
+                        System.out.println("Email Ricevute");
+                        for(int i=0; i<utente.getREmailList().size() ; i++){
+                            System.out.println(utente.getREmailList().get(i).getObject());
+                        }
+                        System.out.println("Email Inviate");
+                        for(int i=0; i<utente.getIEmailList().size() ; i++){
+                            System.out.println(utente.getIEmailList().get(i).getObject());
                         }
                         break;
                     case 1:
                         //aggiungo email alla lista
-                        SendMail e = new Gson().fromJson(request, SendMail.class);
+                        SendMail e = new Gson().fromJson(packet, SendMail.class);
                         EasyEmail m = e.getEE();
                         String[] dest = m.getDestination();
                         for(int i = 0; i< dest.length; i++) {
@@ -49,10 +57,10 @@ public class ConnectionManager implements Runnable{
                             }
                             else {
                                 System.out.println("Email ricevuta");
-                                destinatario.getEMailList().add(m);
+                                destinatario.getREmailList().add(m);
                             }
                         }
-                        utente.getEMailList().add(m);
+                        utente.getIEmailList().add(m);
                         Save();
                         break;
                     default:
