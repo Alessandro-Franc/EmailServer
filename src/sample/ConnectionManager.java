@@ -63,6 +63,13 @@ public class ConnectionManager implements Runnable{
                         utente.getIEmailList().add(m);
                         Save();
                         break;
+                    case 2:
+                        //delete mail
+                        DeleteMail d = new Gson().fromJson(packet, DeleteMail.class);
+                        EasyEmail m2 = d.getEE();
+                        System.out.println(utente.getIEmailList().remove(m2));
+                        System.out.println(utente.getREmailList().remove(m2));
+                        Save();
                     default:
                         break;
                 }
