@@ -47,6 +47,7 @@ public class ConnectionManager implements Runnable{
                         break;
                     case 1:
                         //aggiungo email alla lista
+                        boolean success = false;
                         SendMail e = new Gson().fromJson(packet, SendMail.class);
                         EasyEmail m = e.getEE();
                         String[] dest = m.getDestination();
@@ -58,9 +59,10 @@ public class ConnectionManager implements Runnable{
                             else {
                                 System.out.println("Email ricevuta");
                                 destinatario.getREmailList().add(m);
+                                success = true;
                             }
                         }
-                        utente.getIEmailList().add(m);
+                        if(success) utente.getIEmailList().add(m);
                         Save();
                         break;
                     case 2:
