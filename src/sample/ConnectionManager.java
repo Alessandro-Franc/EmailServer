@@ -69,8 +69,23 @@ public class ConnectionManager implements Runnable{
                         //delete mail
                         DeleteMail d = new Gson().fromJson(packet, DeleteMail.class);
                         EasyEmail m2 = d.getEE();
-                        System.out.println(utente.getIEmailList().remove(m2));
-                        System.out.println(utente.getREmailList().remove(m2));
+                        switch(d.getLocation()) {
+                            case 0:
+                                for (int i = 0; i < utente.getREmailList().size(); i++) {
+                                    if (utente.getREmailList().get(i).Equals(m2)) {
+                                        utente.getREmailList().remove(i);
+                                        System.out.println("email rimossa dalla lista ricevute di " + u);
+                                    }
+                                }
+                            break;
+                            case 1:
+                                for (int i = 0; i < utente.getIEmailList().size(); i++) {
+                                    if (utente.getIEmailList().get(i).Equals(m2)) {
+                                        utente.getIEmailList().remove(i);
+                                        System.out.println("email rimossa dalla lista inviate di " + u);
+                                    }
+                                }
+                        }
                         Save();
                     default:
                         break;

@@ -31,4 +31,19 @@ public class EasyEmail implements Serializable {
     public String getMitt(){
         return Mitt;
     }
+
+    public boolean Equals(EasyEmail m) {
+        if(this.toString().equals(m.toString())) return true;
+        else return false;
+    }
+
+    @Override
+    public String toString() {
+        String dest = "";
+        for(int i = 0; i<this.destination.length; i++) {
+            dest += destination[i];
+            dest += "; ";
+        }
+        return "Mitt: "+this.getMitt() + " dest: " + dest + ", Object: "+ this.getObject() + ", eText: "+this.geteText();
+    }
 }
