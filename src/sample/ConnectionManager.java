@@ -48,20 +48,27 @@ public class ConnectionManager implements Runnable{
                     case 1:
                         //aggiungo email alla lista
                         boolean success = false;
+                        String err = "";
+                        int counter = 0;
                         SendMail e = new Gson().fromJson(packet, SendMail.class);
                         EasyEmail m = e.getEE();
                         String[] dest = m.getDestination();
                         for(int i = 0; i< dest.length; i++) {
                             Utente destinatario = model.getUtente(dest[i]);
                             if(destinatario==null) {
-                                System.out.println("Destinatario numero "+(i+1)+" inesistente");
+                                err += "Destinatario numero "+(i+1)+" inesistente\n";
                             }
                             else {
                                 System.out.println("Email ricevuta");
                                 destinatario.getREmailList().add(m);
+                                counter++;
                                 success = true;
                             }
                         }
+                        err += "Email inviata con successo a "+counter+" destinatari";
+                        System.out.println(err);
+                        DataOutputStream response = new DataOutputStream(socket.getOutputStream());
+                        response.writeUTF(err);
                         if(success) utente.getIEmailList().add(m);
                         Save();
                         break;
@@ -69,12 +76,16 @@ public class ConnectionManager implements Runnable{
                         //delete mail
                         DeleteMail d = new Gson().fromJson(packet, DeleteMail.class);
                         EasyEmail m2 = d.getEE();
+                        DataOutputStream result = new DataOutputStream(socket.getOutputStream());
+                        String res = "";
                         switch(d.getLocation()) {
                             case 0:
                                 for (int i = 0; i < utente.getREmailList().size(); i++) {
                                     if (utente.getREmailList().get(i).Equals(m2)) {
                                         utente.getREmailList().remove(i);
+                                        res += "email rimossa dalla lista ricevute di " + u;
                                         System.out.println("email rimossa dalla lista ricevute di " + u);
+
                                     }
                                 }
                             break;
@@ -82,10 +93,13 @@ public class ConnectionManager implements Runnable{
                                 for (int i = 0; i < utente.getIEmailList().size(); i++) {
                                     if (utente.getIEmailList().get(i).Equals(m2)) {
                                         utente.getIEmailList().remove(i);
+                                        res += "email rimossa dalla lista inviate di " + u;
                                         System.out.println("email rimossa dalla lista inviate di " + u);
                                     }
                                 }
                         }
+                        if(res.equals("")) res = "email da eliminare non trovata";
+                        result.writeUTF(res);
                         Save();
                     default:
                         break;
