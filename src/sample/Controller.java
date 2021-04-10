@@ -22,7 +22,9 @@ public class Controller{
 
     public void start(Model model){
         this.model = model;
-        ServerText.setText("ciao");
+
+        ServerText.textProperty().bindBidirectional(model.outPutTextProperty());
+
         try{
             Load();
         } catch (Exception e ) { //creo utenti fittizzi
@@ -46,18 +48,9 @@ public class Controller{
             //Andrea.addRMail(d);
             model.addUtente(Andrea);
         }
-        try{
-            ServerSocket s = new ServerSocket(8082);
-            System.out.println("Socket Creato");
-            while(true){
-                Socket tube = s.accept();
-                Runnable r = new ConnectionManager(this.model , tube);
-                Thread t = new Thread(r);
-                t.start();
-            }
-        }catch(IOException e){
-            e.printStackTrace();
-        }
+        Runnable r = new StartExec(this.model);
+        Thread t = new Thread(r);
+        t.start();
     }
 
     public void Load() throws IOException, ClassNotFoundException {
