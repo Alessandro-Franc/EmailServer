@@ -6,7 +6,11 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class Model{
     //lista delle email
@@ -33,7 +37,10 @@ public class Model{
     }
 
    public void addOutPutText (String s){
-        setOutPutText(getOutPutText() + s + "\n");
+       Date date = Calendar.getInstance().getTime();
+       DateFormat dateFormat = new SimpleDateFormat("HH:mm, dd/MM/yyyy");
+       String data = dateFormat.format(date);
+       setOutPutText(getOutPutText() +" "+data+" "+ s + "\n");
    }
 
     public void addUtente(Utente u) {

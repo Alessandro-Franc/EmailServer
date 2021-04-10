@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.concurrent.Task;
+
 import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.net.ServerSocket;
@@ -19,9 +21,16 @@ public class StartExec implements Runnable{
         this.model = m;
     }
 
+
     public static void stop() {
+        try {
+            s.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         executor.shutdown();
     }
+
 
     @Override
     public void run() {
@@ -37,7 +46,7 @@ public class StartExec implements Runnable{
                // t.start();
             }
         }catch(IOException e){
-           System.out.println("Server off");
+           e.printStackTrace();
         }
     }
 }

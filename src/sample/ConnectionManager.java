@@ -34,7 +34,7 @@ public class ConnectionManager implements Runnable{
                 switch (Rtype) {
                     case 0:
                         //Invio la lista delle email
-                        model.addOutPutText("Richiesta da :" + u + " , Lista email inviata");
+                        model.addOutPutText("Richiesta da: " + u + ", Lista email inviata");
                         ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
                         out.writeObject(utente.getEMailList());
                         System.out.println("Email Ricevute");
@@ -58,18 +58,18 @@ public class ConnectionManager implements Runnable{
                             Utente destinatario = model.getUtente(dest[i]);
                             if(destinatario==null) {
                                 err += "Destinatario numero "+(i+1)+" inesistente\n";
-                                model.addOutPutText("Richiesta da :" + u + err);
+                                model.addOutPutText("Richiesta da:" + u + err);
                             }
                             else {
                                 System.out.println("Email ricevuta");
                                 destinatario.getREmailList().add(m);
                                 counter++;
                                 success = true;
-                                model.addOutPutText("Richiesta da :" + u + "Email Ricevuta");
+                                model.addOutPutText("Richiesta da: " + u + ", Email Ricevuta");
                             }
                         }
                         err += "Email inviata con successo a "+counter+" destinatari";
-                        model.addOutPutText("Richiesta da :" + u + err);
+                        model.addOutPutText("Richiesta da: " + u +" "+ err);
                         System.out.println(err);
                         DataOutputStream response = new DataOutputStream(socket.getOutputStream());
                         response.writeUTF(err);
@@ -88,7 +88,7 @@ public class ConnectionManager implements Runnable{
                                     if (utente.getREmailList().get(i).Equals(m2)) {
                                         utente.getREmailList().remove(i);
                                         res += "email rimossa dalla lista ricevute di " + u;
-                                        model.addOutPutText("Richiesta da :" + u + res);
+                                        model.addOutPutText("Richiesta da: " + u + res);
                                         //System.out.println("email rimossa dalla lista ricevute di " + u);
 
                                     }
@@ -99,13 +99,13 @@ public class ConnectionManager implements Runnable{
                                     if (utente.getIEmailList().get(i).Equals(m2)) {
                                         utente.getIEmailList().remove(i);
                                         res += "email rimossa dalla lista inviate di " + u;
-                                        model.addOutPutText("Richiesta da :" + u + res);
+                                        model.addOutPutText("Richiesta da: " + u + res);
                                         System.out.println("email rimossa dalla lista inviate di " + u);
                                     }
                                 }
                         }
                         if(res.equals("")) res = "email da eliminare non trovata";
-                        model.addOutPutText("Richiesta da :" + u + res);
+                        model.addOutPutText("Richiesta da: " + u + res);
                         result.writeUTF(res);
                         Save();
                     default:
