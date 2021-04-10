@@ -4,21 +4,29 @@ import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
 public class StartExec implements Runnable{
     static ScheduledExecutorService executor = Executors.newScheduledThreadPool(5);
 
+    static ServerSocket s;
+
     private Model model;
 
     public  StartExec(Model m){
         this.model = m;
     }
+
+    public static void stop() {
+        executor.shutdown();
+    }
+
     @Override
     public void run() {
         try{
-            ServerSocket s = new ServerSocket(8082);
+            s = new ServerSocket(8082);
             System.out.println("Socket Creato");
             while(true){
                 Socket tube = s.accept();
@@ -29,7 +37,7 @@ public class StartExec implements Runnable{
                // t.start();
             }
         }catch(IOException e){
-            e.printStackTrace();
+           System.out.println("Server off");
         }
     }
 }

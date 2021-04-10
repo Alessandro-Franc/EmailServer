@@ -7,13 +7,15 @@ public class EasyEmail implements Serializable {
     private String Mitt;
     private String object;
     private String eText;
+    private String data;
 
 
-    public EasyEmail(String[] destination, String Mitt, String obj , String eText){
+    public EasyEmail(String[] destination, String Mitt, String obj , String eText, String data){
         this.destination = destination;
         this.Mitt = Mitt;
         this.object=obj;
         this.eText = eText;
+        this.data = data;
     }
 
     public String getObject(){
@@ -31,6 +33,8 @@ public class EasyEmail implements Serializable {
     public String getMitt(){
         return Mitt;
     }
+
+    public String getData() {return data;}
 
     public boolean Equals(EasyEmail m) {
         if(this.toString().equals(m.toString())) return true;
