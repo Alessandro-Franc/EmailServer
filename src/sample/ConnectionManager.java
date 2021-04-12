@@ -108,6 +108,9 @@ public class ConnectionManager implements Runnable{
                         model.addOutPutText("Richiesta da: " + u + res);
                         result.writeUTF(res);
                         Save();
+                    case 5:
+                        System.out.println("chiudo server");
+                        break;
                     default:
                         break;
                 }

@@ -6,7 +6,7 @@ public class Request implements Serializable {
     private int Rtype;
     private String Utente;
 
-    public Request (int iRtype, String u) {
+    public Request (int Rtype, String u) {
         this.Rtype = Rtype;
         this.Utente = u;
     }
