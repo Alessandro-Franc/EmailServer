@@ -28,19 +28,17 @@ public class StartExec implements Runnable {
         active = false;
     }
 
-
     public static void stop() {
         setActive();
         try {
             String nomeHost = InetAddress.getLocalHost().getHostName();
             Socket s = new Socket(nomeHost, 8082);
             String send =  new Gson().toJson(new Request(5, "Mario@mail"));
-            System.out.println(send);
             DataOutputStream emailOut = new DataOutputStream(s.getOutputStream());
             emailOut.writeUTF(send);
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -56,14 +54,13 @@ public class StartExec implements Runnable {
                 model.addOutPutText("Connessione eseguita");
             }
         }   catch (IOException e) {
-            System.out.println("socket err");
+            e.printStackTrace();
             } finally {
                 try {
                     s.close();
                     executor.shutdown();
-                    System.out.println("Sto in final");
                 } catch (Exception e){
-                    System.out.println("Sto in catch");
+                    e.printStackTrace();
                 }
             }
         }
