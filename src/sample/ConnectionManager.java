@@ -78,6 +78,7 @@ public class ConnectionManager implements Runnable{
                         break;
                     case 2:
                         //delete mail
+                        Boolean b = true;
                         DeleteMail d = new Gson().fromJson(packet, DeleteMail.class);
                         EasyEmail m2 = d.getEE();
                         DataOutputStream result = new DataOutputStream(socket.getOutputStream());
@@ -85,22 +86,23 @@ public class ConnectionManager implements Runnable{
                         switch(d.getLocation()) {
                             case 0:
                                 for (int i = 0; i < utente.getREmailList().size(); i++) {
-                                    if (utente.getREmailList().get(i).Equals(m2)) {
+                                    if (utente.getREmailList().get(i).Equals(m2) && b) {
                                         utente.getREmailList().remove(i);
                                         res += "email rimossa dalla lista ricevute di " + u;
                                         model.addOutPutText("Richiesta da: " + u + res);
                                         //System.out.println("email rimossa dalla lista ricevute di " + u);
-
+                                        b = false;
                                     }
                                 }
                             break;
                             case 1:
                                 for (int i = 0; i < utente.getIEmailList().size(); i++) {
-                                    if (utente.getIEmailList().get(i).Equals(m2)) {
+                                    if (utente.getIEmailList().get(i).Equals(m2) && b) {
                                         utente.getIEmailList().remove(i);
                                         res += "email rimossa dalla lista inviate di " + u;
                                         model.addOutPutText("Richiesta da: " + u + res);
                                         System.out.println("email rimossa dalla lista inviate di " + u);
+                                        b = false;
                                     }
                                 }
                         }
