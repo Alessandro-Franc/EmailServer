@@ -1,7 +1,6 @@
 package sample;
 
 import com.google.gson.Gson;
-
 import java.io.*;
 import java.net.Socket;
 
